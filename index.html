@@ -1,148 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>PayPal Demo</title>
-  </head>
-  <body>
-    <h1>Shopping Cart</h1>
+</head>
+<body>
+<h1>Shopping Cart</h1>
 
-    <div class="product">
-      <img src="https://d1p6nzzdute2g.cloudfront.net/lojas/loja-1414/3e1da591-dca9-49c2-9055-ab82c6a7f0dc" width="200" height="200" />
-      <h3>Camera</h3>
-      <p>Item Number: 12345</p>
-      <p>Price: R$100</p>
-    </div>
+<div class="product">
+    <img src="https://d1p6nzzdute2g.cloudfront.net/lojas/loja-1414/3e1da591-dca9-49c2-9055-ab82c6a7f0dc" width="200"
+         height="200"/>
+    <h3>Camera</h3>
+    <p>Item Number: 12345</p>
+    <p>Price: R$100</p>
+</div>
 
-    <h2>Buyer Information</h2>
-    <form id="checkout-form">
-      <style>
+<h2>Buyer Information</h2>
+<form id="checkout-form">
+    <style>
         .form-group {
-          margin-bottom: 10px;
-          border-radius: 20%;
+            margin-bottom: 10px;
+            border-radius: 20%;
         }
-        
+
         label {
-          display: block;
-          font-weight: bold;
-          margin-bottom: 5px;
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
         }
-        
+
         input[type="text"],
         input[type="email"],
         input[type="tel"] {
-          width: 20%;
-          padding: 5px;
+            width: 20%;
+            padding: 5px;
         }
 
         #paypal-button-container {
-          width: 21%;
-          height: 20px;
+            width: 21%;
+            height: 20px;
         }
-        </style>
-        
-        <div class="form-group">
-          <label for="first-name">First Name:</label>
-          <input type="text" id="first-name" name="first-name" required />
-        </div>
-        
-        <div class="form-group">
-          <label for="last-name">Last Name:</label>
-          <input type="text" id="last-name" name="last-name" required />
-        </div>
-        
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required />
-        </div>
-        
-        <div class="form-group">
-          <label for="phone">Phone Number:</label>
-          <input type="tel" id="phone" name="phone" required />
-        </div>
-        
-        <div class="form-group">
-          <label for="address1">Address Line 1:</label>
-          <input type="text" id="address1" name="address1" required value="123 Main St" />
-        </div>
-        
-        <div class="form-group">
-          <label for="address2">Address Line 2:</label>
-          <input type="text" id="address2" name="address2" value="Apt 4B" />
-        </div>
-        
-        <div class="form-group">
-          <label for="state">State or Province:</label>
-          <input type="text" id="state" name="state" required value="CA" />
-        </div>
-        
-        <div class="form-group">
-          <label for="zip">Zip or Postal Code:</label>
-          <input type="text" id="zip" name="zip" required value="12345" />
-        </div>
-        
-        <div class="form-group">
-          <label for="country">Country:</label>
-          <input type="text" id="country" name="country" required value="United States" />
-        </div>
-        
-      <div id="paypal-button-container"></div>
-    <script data-sdk-integration-source="integrationbuilder_sc"></script>
+    </style>
+
+    <div class="form-group">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first-name" required/>
+    </div>
+
+    <div class="form-group">
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last-name" required/>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required/>
+    </div>
+
+    <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required/>
+    </div>
+
+    <div class="form-group">
+        <label for="address1">Address Line 1:</label>
+        <input type="text" id="address1" name="address1" required value="123 Main St"/>
+    </div>
+
+    <div class="form-group">
+        <label for="address2">Address Line 2:</label>
+        <input type="text" id="address2" name="address2" value="Apt 4B"/>
+    </div>
+
+    <div class="form-group">
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required value="New York"/>
+    </div>
+
+    <div class="form-group">
+        <label for="state">State or Province:</label>
+        <input type="text" id="state" name="state" required value="CA"/>
+    </div>
+
+    <div class="form-group">
+        <label for="zip">Zip or Postal Code:</label>
+        <input type="text" id="zip" name="zip" required value="12345"/>
+    </div>
+
+    <div class="form-group">
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" required value="US" maxlength="2" />
+    </div>
+
     <div id="paypal-button-container"></div>
+    <script data-sdk-integration-source="integrationbuilder_sc"></script>
     <script src="https://www.paypal.com/sdk/js?client-id=Af7BwxrHkwr8g1774cOArxfnQEY7lbDfceIxQgeqPMKikhnj5ro4JloSZH8HzAYbNVLcf9fqrrLgmomN&currency=BRL"></script>
     <script>
-      paypal
-        .Buttons({
-          createOrder: async (data, actions) => {
-            const response = await fetch("/orders", {
-              method: "POST",
-            });
-            const details = await response.json();
-            return details.id;
-          },
-          onApprove: async (data, actions) => {
-            const response = await fetch(`/orders/${data.orderID}/capture`, {
-              method: "POST",
-            });
-            const details = await response.json();
-            // Three cases to handle:
-            //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
-            //   (2) Other non-recoverable errors -> Show a failure message
-            //   (3) Successful transaction -> Show confirmation or thank you
+        paypal.Buttons({
+            createOrder: function (data, actions) {
+                const address1 = document.getElementById("address1").value;
+                const address2 = document.getElementById("address2").value;
+                const postal_code = document.getElementById("zip").value;
+                const country = document.getElementById("country").value;
+                const city = document.getElementById("city").value;
+                const full_name = `${document.getElementById("first_name").value} ${document.getElementById("last_name").value}`;
+                return actions.order.create({
+                    application_context: {
+                        shipping_preference: 'SET_PROVIDED_ADDRESS',
+                    },
+                    purchase_units: [
+                        {
+                            amount: {
+                                value: '100.00'
+                            },
+                            shipping: {
+                                name: {
+                                    full_name: full_name,
+                                },
+                                address: {
+                                    address_line_1: address1,
+                                    address_line_2: address2,
+                                    admin_area_2: city,
+                                    postal_code: postal_code,
+                                    country_code: country,
+                                }
+                            }
+                        }
+                    ]
+                });
+            },
+            
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (transaction) {
+                    alert(
+                        "Transaction successfull and " + "Thank you for buying with us! " +
+                        "\n Transaction ID " +  transaction.id
+                    );
 
-            // This example reads a v2/checkout/orders capture response, propagated from the server
-            // You could use a different API or structure for your 'orderData'
-
-            const errorDetail =
-              Array.isArray(details.details) && details.details[0];
-            if (errorDetail && errorDetail.issue === "INSTRUMENT_DECLINED") {
-              return actions.restart(); // Recoverable state, per:
-              // https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
+                });
             }
+        }).render('#paypal-button-container');
 
-            if (errorDetail) {
-              let msg = "Sorry, your transaction could not be processed.";
-              if (errorDetail.description)
-                msg += "\n\n" + errorDetail.description;
-              if (details.debug_id) msg += " (" + details.debug_id + ")";
-              return alert(msg); // Show a failure message (try to avoid alerts in production environments)
-            }
-
-            // Successful capture! For demo purposes:
-            console.log(
-              "Capture result",
-              details,
-              JSON.stringify(details, null, 2)
-            );
-            const transaction = details.purchase_units[0].payments.captures[0];
-            alert(
-              "Transaction successfull and " + "Thank you for buying with us! " +
-                "\n Transaction ID " +  transaction.id 
-            );
-          },
-        })
-        .render("#paypal-button-container");
     </script>
-  </body>
+</body>
 </html>
